@@ -43,8 +43,10 @@ function addLine() {
 }
 
 function resetList() {
+    document.querySelector(".js-title").innerHTML = `
+        <div class="title js-title"><input class= "title-tagline" type="text" placeholder="Title"></div>
+    `
     document.querySelector(".js-container").innerHTML = `
-        <div class="title"><input class= "title-tagline" type="text" placeholder="Title"></div>
         <div class= "newLine" id = "js-newLine">
             <button onclick = "addLine();
             "
