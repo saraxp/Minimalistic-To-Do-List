@@ -1,335 +1,73 @@
 <!doctype html>
+
 <html>
-<head>
-    <title>To-Do List</title>
-    <link rel="stylesheet" href="index.css">
-    <script src="index.js"></script> 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,-25" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <div class="title js-title"><input class= "title-tagline" type="text" placeholder="Title"></div>
-    <div class = "js-container">
-        <div class= "newLine" id = "js-newLine">
-            <button onclick = "addLine();"
-            class= "add-line" id ="js-addLine"
-            ><span class="material-symbols-rounded plus-sign">add</span></button>
-        </div>
+    <head>
+
+        <title>To-Do List</title>
         
-        <div id= "js-empty"></div>
-    </div>
+        <link rel="stylesheet" href="index.css">
+        <script src="index.js"></script> 
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,-25" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet">
 
-    <div class ="mini-sp js-miniSP panel-open">
-        <div class="OB-shadow">
-            <div class="openButton">
-                <button class="panelButton js-panelButton" onclick="openPanel();"><?xml version="1.0" encoding="UTF-8"?><svg class="left-arrow" width="24px" height="24px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg" color="#092327"><path d="M21 12L3 12M3 12L11.5 3.5M3 12L11.5 20.5" stroke="#092327" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
-            </div>
-        </div>
-        <div class="refreshLine">
-            <div class = reset-shadow>
-                <button class="reset-button js-reset" onclick = " 
-                resetList(); closePanel();">
-                <?xml version="1.0" encoding="UTF-8"?><svg class="reset-icon" width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#092327"><path d="M21.8883 13.5C21.1645 18.3113 17.013 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C16.1006 2 19.6248 4.46819 21.1679 8" stroke="#092327" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M17 8H21.4C21.7314 8 22 7.73137 22 7.4V3" stroke="#092327" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-            </button>
-            </div>
-        </div>
-    </div>
+    </head>
+    <body>
 
-    <div class="side-panel js-sidePanel">
-        <button class= "close-sidePanel" onclick="closePanel();"><?xml version="1.0" encoding="UTF-8"?><svg class= "right-arrow" width="24px" height="24px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 12L21 12M21 12L12.5 3.5M21 12L12.5 20.5" stroke="#f1f7ed" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
-        <button class="reset-button2 js-reset" onclick = " 
-            resetList();">
-            <?xml version="1.0" encoding="UTF-8"?><svg class= "reset-icon" width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21.8883 13.5C21.1645 18.3113 17.013 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C16.1006 2 19.6248 4.46819 21.1679 8" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M17 8H21.4C21.7314 8 22 7.73137 22 7.4V3" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-        </button>
-        <div class= "line1 js-line1">
-            <div class="section1">
-                <button class= "DD-button" onclick = "viewSubPanel(this);"><?xml version="1.0" encoding="UTF-8"?><svg class= "DD-icon" width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 9L12 15L18 9" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
-                <p class="tagline">Completed Tasks</p> 
-            </div>
-            <div class = "list1 js-list1"></div>
-        </div>
-        <div class= "line2 js-line2">
-            <div class= "section2">
-                <button class= "DD-button" onclick = "viewSubPanel(this);"><?xml version="1.0" encoding="UTF-8"?><svg class= "DD-icon" width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 9L12 15L18 9" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
-                <p class="tagline">Deleted Tasks</p>
-            </div>
-            <div class = "list2 js-list2"></div>
-        </div>
-    </div>
-    
-    
-    <!-- <script>
+        <div class="title js-title"><input class= "title-tagline" type="text" placeholder="Title"></div>
 
-        function showTick(button) {
-            var tick = button.querySelector('.tickMark_png');
-            var taskLine = button.parentElement;
-            var inputField = taskLine.querySelector('.js-input');
 
-            console.log('Initial tick visibility:', window.getComputedStyle(tick).visibility);
-            console.log('Tick element:', tick);
-
-            if (window.getComputedStyle(tick).visibility === "hidden") {
-                tick.style.visibility = "visible";
-                inputField.classList.add('strikethrough');
-                saveCompletedTask(inputField.value);
-                setTimeout(function () {
-                    taskLine.style.display = "none";
-                }, 500);
-            } else {
-                tick.style.visibility = "hidden";
-                inputField.classList.remove('strikethrough');
-                taskLine.style.display = "block";
-            }
-
-            console.log('Updated tick visibility:', window.getComputedStyle(tick).visibility);
-        }
-
-        function addLine() {
-            document.getElementById('js-newLine').outerHTML = `
-            <div class="checkline js-checkline">
-                <button onclick="showTick(this);" class="checkbox js-checkbox">
-                    <?xml version="1.0" encoding="UTF-8"?><svg class="tickMark_png" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#000000"><path d="M5 13L9 17L19 7" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-                </button>
-                <input type= "text" class="task-bar js-input" placeholder= "Enter Task">
-                <button class="trash_button" onclick="deleteTask(this)"><?xml version="1.0" encoding="UTF-8"?><svg class= "trash"  viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg" ><path d="M20 9L18.005 20.3463C17.8369 21.3026 17.0062 22 16.0353 22H7.96474C6.99379 22 6.1631 21.3026 5.99496 20.3463L4 9" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M21 6L15.375 6M3 6L8.625 6M8.625 6V4C8.625 2.89543 9.52043 2 10.625 2H13.375C14.4796 2 15.375 2.89543 15.375 4V6M8.625 6L15.375 6" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
-                </div>
-            `
-            document.getElementById('js-empty').outerHTML = `
+        <div class = "js-container">
             <div class= "newLine" id = "js-newLine">
                 <button onclick = "addLine();"
                 class= "add-line" id ="js-addLine"
                 ><span class="material-symbols-rounded plus-sign">add</span></button>
             </div>
+            
             <div id= "js-empty"></div>
-            `
-        }
+        </div>
 
-        function resetList() {
-            document.querySelector(".js-container").innerHTML = `
-                <div class="title"><input class= "title-tagline" type="text" placeholder="Title"></div>
-                <div class= "newLine" id = "js-newLine">
-                    <button onclick = "addLine();
-                    "
-                    class= "add-line" id ="js-addLine"
-                    ><span class="material-symbols-rounded" "plus-sign" style="color:rgb(197, 28, 28); opacity: 0.8;">add</span></button>
+
+        <div class ="mini-sp js-miniSP panel-open">
+            <div class="OB-shadow">
+                <div class="openButton">
+                    <button class="panelButton js-panelButton" onclick="openPanel();"><?xml version="1.0" encoding="UTF-8"?><svg class="left-arrow" width="24px" height="24px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg" color="#092327"><path d="M21 12L3 12M3 12L11.5 3.5M3 12L11.5 20.5" stroke="#092327" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
                 </div>
-                <div id= "js-empty"></div>  
-            `
-        }
-
-        function openPanel() {
-            document.querySelector('.js-miniSP').classList.remove('panel-open'); // Close mini-sp if open
-            document.querySelector('.js-sidePanel').classList.add('panel-open');
-            document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-        }
-
-        function closePanel() {
-            document.querySelector('.js-sidePanel').classList.remove('panel-open'); // Close side-panel
-            document.querySelector('.js-miniSP').classList.add('panel-open'); // Open mini-sp
-            document.body.style.backgroundColor = "#f1f7ed";
-        }
-  
-        function viewSubPanel(button) {
-            // Get the grandparent div of the button (either line1 or line2)
-            var grandparentDiv = button.closest('.js-line1, .js-line2');
-
-            // Toggle arrow direction
-            var arrowIcon = button.querySelector('.DD-icon');
-            arrowIcon.classList.toggle('rotated');
-
-            // Check which section is being clicked and create respective content
-            if (grandparentDiv.classList.contains('js-line1')) {
-                var completedTasksDiv = grandparentDiv.querySelector('.js-list1');
-
-                // Check if the div already exists, if not, create it
-                if (!completedTasksDiv.innerHTML) {
-                    completedTasksDiv.innerHTML = `
-                        <ul id="completedTasksList"></ul>
-                    `;
-
-                    // Load and display completed tasks
-                    var completedTasks = JSON.parse(localStorage.getItem('completedTasks')) || [];
-                    var completedTasksList = document.getElementById('completedTasksList');
-                    completedTasksList.innerHTML = ''; // Clear any previous content
-                    completedTasks.forEach(task => {
-                        if (task && typeof task === 'string') { // Ensure the task is a valid string
-                            var listItem = document.createElement('li');
-                            listItem.innerHTML = `
-                                ${task}
-                                <div class="popup-menu">
-                                    <div class= "pp-div">
-                                        <button class="popup-button" onclick="deleteTaskPermanently('${task}')">Delete Permanently</button>
-                                        </div>
-                                </div>
-                            `;
-                            completedTasksList.appendChild(listItem);
-                        }
-                    });
-                    arrowIcon.classList.add('rotated'); // Set arrow to rotated
-                } else {
-                    completedTasksDiv.innerHTML = ''; // Clear the div if it already has content
-                    arrowIcon.classList.remove('rotated'); // Reset arrow direction
-                }
-            } else if (grandparentDiv.classList.contains('js-line2')) {
-                var deletedTasksDiv = grandparentDiv.querySelector('.js-list2');
-
-                // Check if the div already exists, if not, create it
-                if (!deletedTasksDiv.innerHTML) {
-                    deletedTasksDiv.innerHTML = `
-                        <ul id="deletedTasksList"></ul>
-                    `;
-
-                    // Load and display deleted tasks
-                    var deletedTasks = JSON.parse(localStorage.getItem('deletedTasks')) || [];
-                    var deletedTasksList = document.getElementById('deletedTasksList');
-                    deletedTasksList.innerHTML = ''; // Clear any previous content
-                    deletedTasks.forEach(task => {
-                        if (task && typeof task === 'string') { // Ensure the task is a valid string
-                            var listItem = document.createElement('li');
-                            listItem.innerHTML = `
-                                ${task}
-                                <div class="popup-menu">
-                                    <div class= "pp-div">
-                                        <button class="popup-button" onclick="restoreTask('${task}')">Restore</button>
-                                        </div>
-                                    <div class= "pp-div">
-                                        <button class="popup-button" onclick="deleteTaskPermanently('${task}')">Delete Permanently</button>
-                                        </div>
-                                </div>
-                            `;
-                            deletedTasksList.appendChild(listItem);
-                        }
-                    });
-                    arrowIcon.classList.add('rotated'); // Set arrow to rotated
-                } else {
-                    deletedTasksDiv.innerHTML = ''; // Clear the div if it already has content
-                    arrowIcon.classList.remove('rotated'); // Reset arrow direction
-                }
-            }
-        }
-
-        function saveCompletedTask(taskText) {
-            // Retrieve existing completed tasks from localStorage or initialize an empty array
-            var completedTasks = JSON.parse(localStorage.getItem('completedTasks')) || [];
-            
-            // Add the completed task to the array
-            completedTasks.push(taskText);
-            
-            // Save the updated array back to localStorage
-            localStorage.setItem('completedTasks', JSON.stringify(completedTasks));
-
-            // Check if the completed tasks list is already displayed and update it
-            var completedTasksList = document.getElementById('completedTasksList');
-            if (completedTasksList) {
-                var listItem = document.createElement('li');
-                listItem.textContent = taskText;
-                completedTasksList.appendChild(listItem);
-            }
-        }
-
-        function saveDeletedTask(taskText) {
-            // Retrieve existing deleted tasks from localStorage or initialize an empty array
-            var deletedTasks = JSON.parse(localStorage.getItem('deletedTasks')) || [];
-            
-            // Add the deleted task to the array
-            deletedTasks.push(taskText);
-            
-            // Save the updated array back to localStorage
-            localStorage.setItem('deletedTasks', JSON.stringify(deletedTasks));
-
-            // Check if the deleted tasks list is already displayed and update it
-            var deletedTasksList = document.getElementById('deletedTasksList');
-            if (deletedTasksList) {
-                var listItem = document.createElement('li');
-                listItem.textContent = taskText;
-                deletedTasksList.appendChild(listItem);
-            }
-        }
-    
-        function deleteTask(button) {
-            var deleteLine = button.parentElement;
-            var inputField = deleteLine.querySelector('.js-input');
-
-            // Save the deleted task
-            saveDeletedTask(inputField.value);
-
-            // Remove the task line
-            deleteLine.outerHTML = '';
-        }
-
-        function restoreTask(task) {
-            // Remove the task from deleted tasks in localStorage
-            var deletedTasks = JSON.parse(localStorage.getItem('deletedTasks')) || [];
-            deletedTasks = deletedTasks.filter(t => t !== task);
-            localStorage.setItem('deletedTasks', JSON.stringify(deletedTasks));
-
-            // Add the task back to the to-do list (you can adjust this function as per your existing addLine implementation)
-            var taskList = document.querySelector('.js-container');
-            var taskLine = document.createElement('div');
-            taskLine.classList.add('checkline', 'js-checkline');
-            taskLine.innerHTML = `
-                <button onclick="showTick(this);" class="checkbox js-checkbox">
-                    <img class="tickMark_png" src="tick.png" style="display: none;">
+            </div>
+            <div class="refreshLine">
+                <div class = reset-shadow>
+                    <button class="reset-button js-reset" onclick = " 
+                    resetList(); closePanel();">
+                    <?xml version="1.0" encoding="UTF-8"?><svg class="reset-icon" width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#092327"><path d="M21.8883 13.5C21.1645 18.3113 17.013 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C16.1006 2 19.6248 4.46819 21.1679 8" stroke="#092327" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M17 8H21.4C21.7314 8 22 7.73137 22 7.4V3" stroke="#092327" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
                 </button>
-                <input type="text" class="task-bar js-input" value="${task}">
-                <button class="trash_button" onclick="deleteTask(this)"><?xml version="1.0" encoding="UTF-8"?><svg class="trash"  viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg" ><path d="M20 9L18.005 20.3463C17.8369 21.3026 17.0062 22 16.0353 22H7.96474C6.99379 22 6.1631 21.3026 5.99496 20.3463L4 9" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M21 6L15.375 6M3 6L8.625 6M8.625 6V4C8.625 2.89543 9.52043 2 10.625 2H13.375C14.4796 2 15.375 2.89543 15.375 4V6M8.625 6L15.375 6" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
-            `;
-            taskList.insertBefore(taskLine, taskList.firstChild);
-
-            // Remove the task from the deleted tasks list in the UI
-            var deletedTasksList = document.getElementById('deletedTasksList');
-            var listItems = deletedTasksList.getElementsByTagName('li');
-            for (var i = 0; i < listItems.length; i++) {
-                if (listItems[i].textContent.includes(task)) {
-                    listItems[i].remove();
-                    break;
-                }
-            }
-        }
-
-        function deleteTaskPermanently(task) {
-            // Remove the task from deleted tasks in localStorage
-            var deletedTasks = JSON.parse(localStorage.getItem('deletedTasks')) || [];
-            deletedTasks = deletedTasks.filter(t => t!== task);
-            localStorage.setItem('deletedTasks', JSON.stringify(deletedTasks));
-
-            var completedTasks = JSON.parse(localStorage.getItem('completedTasks')) || [];
-            completedTasks = completedTasks.filter(t => t!== task);
-            localStorage.setItem('completedTasks', JSON.stringify(completedTasks));
-
-            // Remove the task from the deleted tasks list in the UI
-            var deletedTasksList = document.getElementById('deletedTasksList');
-            if (deletedTasksList) {
-                var listItems = deletedTasksList.getElementsByTagName('li');
-                var i = 0;
-                while (i < listItems.length) {
-                    if (listItems[i].textContent.includes(task)) {
-                        listItems[i].remove();
-                    } else {
-                        i++;
-                    }
-                }
-            }
-
-            // Remove the task from the completed tasks list in the UI
-            var completedTasksList = document.getElementById('completedTasksList');
-            if (completedTasksList) {
-                var listItems = completedTasksList.getElementsByTagName('li');
-                var i = 0;
-                while (i < listItems.length) {
-                    if (listItems[i].textContent.includes(task)) {
-                        listItems[i].remove();
-                    } else {
-                        i++;
-                    }
-                }
-            }
-        }
+                </div>
+            </div>
+        </div>
 
 
-    </script> -->
+        <div class="side-panel js-sidePanel">
+            <button class= "close-sidePanel" onclick="closePanel();"><?xml version="1.0" encoding="UTF-8"?><svg class= "right-arrow" width="24px" height="24px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 12L21 12M21 12L12.5 3.5M21 12L12.5 20.5" stroke="#f1f7ed" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+            <button class="reset-button2 js-reset" onclick = " 
+                resetList();">
+                <?xml version="1.0" encoding="UTF-8"?><svg class= "reset-icon" width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21.8883 13.5C21.1645 18.3113 17.013 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C16.1006 2 19.6248 4.46819 21.1679 8" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M17 8H21.4C21.7314 8 22 7.73137 22 7.4V3" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            </button>
+            <div class= "line1 js-line1">
+                <div class="section1">
+                    <button class= "DD-button" onclick = "viewSubPanel(this);"><?xml version="1.0" encoding="UTF-8"?><svg class= "DD-icon" width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 9L12 15L18 9" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+                    <p class="tagline">Completed Tasks</p> 
+                </div>
+                <div class = "list1 js-list1"></div>
+            </div>
+            <div class= "line2 js-line2">
+                <div class= "section2">
+                    <button class= "DD-button" onclick = "viewSubPanel(this);"><?xml version="1.0" encoding="UTF-8"?><svg class= "DD-icon" width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 9L12 15L18 9" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+                    <p class="tagline">Deleted Tasks</p>
+                </div>
+                <div class = "list2 js-list2"></div>
+            </div>
+        </div>
+        
 
-</body>
+    </body>
 </html>

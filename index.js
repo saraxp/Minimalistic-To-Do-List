@@ -58,41 +58,37 @@ function resetList() {
 }
 
 function openPanel() {
-    document.querySelector('.js-miniSP').classList.remove('panel-open'); // Close mini-sp if open
+    document.querySelector('.js-miniSP').classList.remove('panel-open'); 
     document.querySelector('.js-sidePanel').classList.add('panel-open');
     document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
 }
 
 function closePanel() {
-    document.querySelector('.js-sidePanel').classList.remove('panel-open'); // Close side-panel
-    document.querySelector('.js-miniSP').classList.add('panel-open'); // Open mini-sp
+    document.querySelector('.js-sidePanel').classList.remove('panel-open'); 
+    document.querySelector('.js-miniSP').classList.add('panel-open'); 
     document.body.style.backgroundColor = "#f1f7ed";
 }
 
 function viewSubPanel(button) {
-    // Get the grandparent div of the button (either line1 or line2)
     var grandparentDiv = button.closest('.js-line1, .js-line2');
 
     // Toggle arrow direction
     var arrowIcon = button.querySelector('.DD-icon');
     arrowIcon.classList.toggle('rotated');
 
-    // Check which section is being clicked and create respective content
     if (grandparentDiv.classList.contains('js-line1')) {
         var completedTasksDiv = grandparentDiv.querySelector('.js-list1');
 
-        // Check if the div already exists, if not, create it
         if (!completedTasksDiv.innerHTML) {
             completedTasksDiv.innerHTML = `
                 <ul id="completedTasksList"></ul>
             `;
 
-            // Load and display completed tasks
             var completedTasks = JSON.parse(localStorage.getItem('completedTasks')) || [];
             var completedTasksList = document.getElementById('completedTasksList');
-            completedTasksList.innerHTML = ''; // Clear any previous content
+            completedTasksList.innerHTML = ''; 
             completedTasks.forEach(task => {
-                if (task && typeof task === 'string') { // Ensure the task is a valid string
+                if (task && typeof task === 'string') { 
                     var listItem = document.createElement('li');
                     listItem.innerHTML = `
                         ${task}
@@ -105,26 +101,24 @@ function viewSubPanel(button) {
                     completedTasksList.appendChild(listItem);
                 }
             });
-            arrowIcon.classList.add('rotated'); // Set arrow to rotated
+            arrowIcon.classList.add('rotated'); 
         } else {
-            completedTasksDiv.innerHTML = ''; // Clear the div if it already has content
+            completedTasksDiv.innerHTML = ''; 
             arrowIcon.classList.remove('rotated'); // Reset arrow direction
         }
     } else if (grandparentDiv.classList.contains('js-line2')) {
         var deletedTasksDiv = grandparentDiv.querySelector('.js-list2');
 
-        // Check if the div already exists, if not, create it
         if (!deletedTasksDiv.innerHTML) {
             deletedTasksDiv.innerHTML = `
                 <ul id="deletedTasksList"></ul>
             `;
 
-            // Load and display deleted tasks
             var deletedTasks = JSON.parse(localStorage.getItem('deletedTasks')) || [];
             var deletedTasksList = document.getElementById('deletedTasksList');
-            deletedTasksList.innerHTML = ''; // Clear any previous content
+            deletedTasksList.innerHTML = ''; 
             deletedTasks.forEach(task => {
-                if (task && typeof task === 'string') { // Ensure the task is a valid string
+                if (task && typeof task === 'string') { 
                     var listItem = document.createElement('li');
                     listItem.innerHTML = `
                         ${task}
@@ -140,25 +134,21 @@ function viewSubPanel(button) {
                     deletedTasksList.appendChild(listItem);
                 }
             });
-            arrowIcon.classList.add('rotated'); // Set arrow to rotated
+            arrowIcon.classList.add('rotated'); 
         } else {
-            deletedTasksDiv.innerHTML = ''; // Clear the div if it already has content
+            deletedTasksDiv.innerHTML = ''; 
             arrowIcon.classList.remove('rotated'); // Reset arrow direction
         }
     }
 }
 
 function saveCompletedTask(taskText) {
-    // Retrieve existing completed tasks from localStorage or initialize an empty array
     var completedTasks = JSON.parse(localStorage.getItem('completedTasks')) || [];
     
-    // Add the completed task to the array
     completedTasks.push(taskText);
     
-    // Save the updated array back to localStorage
     localStorage.setItem('completedTasks', JSON.stringify(completedTasks));
 
-    // Check if the completed tasks list is already displayed and update it
     var completedTasksList = document.getElementById('completedTasksList');
     if (completedTasksList) {
         var listItem = document.createElement('li');
@@ -168,16 +158,12 @@ function saveCompletedTask(taskText) {
 }
 
 function saveDeletedTask(taskText) {
-    // Retrieve existing deleted tasks from localStorage or initialize an empty array
     var deletedTasks = JSON.parse(localStorage.getItem('deletedTasks')) || [];
     
-    // Add the deleted task to the array
     deletedTasks.push(taskText);
     
-    // Save the updated array back to localStorage
     localStorage.setItem('deletedTasks', JSON.stringify(deletedTasks));
 
-    // Check if the deleted tasks list is already displayed and update it
     var deletedTasksList = document.getElementById('deletedTasksList');
     if (deletedTasksList) {
         var listItem = document.createElement('li');
@@ -189,21 +175,16 @@ function saveDeletedTask(taskText) {
 function deleteTask(button) {
     var deleteLine = button.parentElement;
     var inputField = deleteLine.querySelector('.js-input');
-
-    // Save the deleted task
     saveDeletedTask(inputField.value);
-
-    // Remove the task line
     deleteLine.outerHTML = '';
 }
 
 function restoreTask(task) {
-    // Remove the task from deleted tasks in localStorage
     var deletedTasks = JSON.parse(localStorage.getItem('deletedTasks')) || [];
     deletedTasks = deletedTasks.filter(t => t !== task);
     localStorage.setItem('deletedTasks', JSON.stringify(deletedTasks));
 
-    // Add the task back to the to-do list (you can adjust this function as per your existing addLine implementation)
+    
     var taskList = document.querySelector('.js-container');
     var taskLine = document.createElement('div');
     taskLine.classList.add('checkline', 'js-checkline');
@@ -216,7 +197,7 @@ function restoreTask(task) {
     `;
     taskList.insertBefore(taskLine, taskList.firstChild);
 
-    // Remove the task from the deleted tasks list in the UI
+    
     var deletedTasksList = document.getElementById('deletedTasksList');
     var listItems = deletedTasksList.getElementsByTagName('li');
     for (var i = 0; i < listItems.length; i++) {
@@ -228,7 +209,6 @@ function restoreTask(task) {
 }
 
 function deleteTaskPermanently(task) {
-    // Remove the task from deleted tasks in localStorage
     var deletedTasks = JSON.parse(localStorage.getItem('deletedTasks')) || [];
     deletedTasks = deletedTasks.filter(t => t!== task);
     localStorage.setItem('deletedTasks', JSON.stringify(deletedTasks));
@@ -237,7 +217,6 @@ function deleteTaskPermanently(task) {
     completedTasks = completedTasks.filter(t => t!== task);
     localStorage.setItem('completedTasks', JSON.stringify(completedTasks));
 
-    // Remove the task from the deleted tasks list in the UI
     var deletedTasksList = document.getElementById('deletedTasksList');
     if (deletedTasksList) {
         var listItems = deletedTasksList.getElementsByTagName('li');
@@ -250,8 +229,7 @@ function deleteTaskPermanently(task) {
             }
         }
     }
-
-    // Remove the task from the completed tasks list in the UI
+   
     var completedTasksList = document.getElementById('completedTasksList');
     if (completedTasksList) {
         var listItems = completedTasksList.getElementsByTagName('li');
