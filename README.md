@@ -29,6 +29,7 @@ https://github.com/user-attachments/assets/2ea095d6-ad4f-4287-a36a-5adbd29b8f7f
 https://github.com/user-attachments/assets/9efd2974-089d-4e93-91a2-ae427cb74b0c
 
 <em>View your completed or deleted tasks in the side-panel. Restore any deleted tasks as per your requirement or permanently delete them.</em>
+
 <br>
 https://github.com/user-attachments/assets/f478f9fd-bcc5-4282-9d6e-21445e698d26
 
